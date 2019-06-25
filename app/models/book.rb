@@ -1,3 +1,15 @@
 class Book < ApplicationRecord
   has_many :comments, dependent: :destroy
+
+  scope :filter_name, ->(name) { where '`name` like ?', "%#{name}%" if name.present?}
+  scope :filter_author, ->(author) { where '`author` like ?', "%#{author}%" if author.present?}
+  scope :filter_price_start, ->(price) { where '`price` >= ?', price.to_f if price.present? }
+  scope :filter_price_end, ->(price) { where '`price` <= ?', price.to_f if price.present? }
+  scope :filter_page, ->(page_size, page_no) {
+    page_size, page_no = page_size.to_i, page_no.to_i
+    page_size = 15 if page_size < 1
+    page_no = 0 if page_no < 0
+
+    offset(page_size * page_no).limit(page_size)
+  }
 end
