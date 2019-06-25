@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :books
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end

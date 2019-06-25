@@ -6,5 +6,40 @@ module Types
     def test_field
       "Hello World"
     end
+
+    field :book1, String, null: false
+    def book1
+      'hello world'
+    end
+
+    field :booo, BookType, null: false do
+      description "Create a book by ID"
+      argument :name, String, required: true
+      argument :author, String, required: true
+      argument :price, Float, required: true
+    end
+    def booo(name:, author:, price:)
+      Book.create!(
+        name: name,
+        author: author,
+        price: price
+      )
+    end
+
+    field :bookUpdate, BookType, null: false do
+      description 'update book info'
+      argument :id, ID, required: true
+      argument :name, String, required: false
+      argument :author, String, required: false
+      argument :price, Float, required: false
+    end
+    def book_update(id:, name:, author:, price:)
+      book = Book.find id
+      book.name = name if name.present?
+      book.author = author if author.present?
+      book.price = price if price.present?
+      book.save!
+      book
+    end
   end
 end
