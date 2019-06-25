@@ -41,5 +41,20 @@ module Types
       book.save!
       book
     end
+
+    field :bookDestroy, String, null: false do
+      description 'destroy book'
+      argument :id, ID, required: true
+    end
+    def book_destroy(id:)
+      book = Book.find_by_id(id)
+
+      if book
+        book.destroy
+        'Success!'
+      else
+        "book[#{id}] is not found"
+      end
+    end
   end
 end

@@ -45,6 +45,8 @@ def create_book
   result_hash = GplTestSchema.execute(query_string)
 end
 
+result_hash = GplTestSchema.execute "mutation{booo(name: \"aaa\",author:\"aaa\",price:123.45)\n{\nid\nname,author,price}}"
+
 def update_book(id, name, author, price)
   query_string = "
   mutation{
@@ -61,3 +63,14 @@ end
 
 update_book(201, "book 201", 'author 201', 1234.56)
 
+def destroy_book(id)
+  query_string = "
+    mutation {
+      bookDestroy(id: #{id})
+    }
+  "
+  result_hash = GplTestSchema.execute(query_string)
+end
+destroy_book(1)
+destroy_book(201)
+destroy_book(202)
