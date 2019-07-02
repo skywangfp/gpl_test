@@ -37,5 +37,14 @@ module Types
         .filter_price_end(price_end)
         .filter_page(page_size, page_no)
     end
+
+    field :user, UserType, null: false do
+      description 'find user by id'
+      argument :id, ID, required: true
+    end
+
+    def user(id:)
+      User.find(id)
+    end
   end
 end

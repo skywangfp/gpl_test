@@ -54,6 +54,8 @@ end
 gem 'graphql'
 gem 'graphiql-rails'
 
+gem 'react_on_rails'
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'

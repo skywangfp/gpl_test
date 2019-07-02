@@ -12,13 +12,13 @@ module Types
       'hello world'
     end
 
-    field :booo, BookType, null: false do
+    field :bookCreate, BookType, null: false do
       description "Create a book by ID"
       argument :name, String, required: true
       argument :author, String, required: true
       argument :price, Float, required: true
     end
-    def booo(name:, author:, price:)
+    def book_create(name:, author:, price:)
       Book.create!(
         name: name,
         author: author,

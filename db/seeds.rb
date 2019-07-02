@@ -29,9 +29,22 @@ def create_comments(book, num)
   end
 end
 
-Comment.destroy_all
-Book.destroy_all
-books = create_books(100)
-books.each do |book|
-  create_comments(book, rand(10))
+# Comment.destroy_all
+# Book.destroy_all
+# books = create_books(100)
+# books.each do |book|
+#   create_comments(book, rand(10))
+# end
+
+def create_users(num)
+  num = 1 if num < 1
+  num.times do |idx|
+    User.create!(
+      name: "name #{idx}",
+      gender: (rand(2).odd? ? 'm' : 'f'),
+      birthday: Date.today - 365*18 - rand(1000)
+    )
+  end
 end
+
+create_users(10)
