@@ -9,11 +9,20 @@ class Types::BookType < Types::BaseObject
   field :updated_at, String, null: false
   field :comments, [Types::CommentType], null: true do
     description 'comments'
+    argument :bookId, ID, required: false
     argument :pageSize, Integer, required: false
     argument :pageNo, Integer, required: false
   end
+  field :comments_count, Integer, null: false do
+    description 'comments count'
+  end
 
-  def comments(page_size: nil, page_no: nil)
-    object.comments.filter_page(page_size, page_no)
+  def comments(book_id: nil, page_size: nil, page_no: nil)
+    return [] unless object.id.eql?(book_id.to_i)
+    object.comments.filter_page(page_size, page_no).order(id: :desc)
+  end
+
+  def comments_count
+    object.comments.count
   end
 end

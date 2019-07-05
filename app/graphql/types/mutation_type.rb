@@ -56,5 +56,33 @@ module Types
         "book[#{id}] is not found"
       end
     end
+
+    field :commentDestroy, String, null: false do
+      description 'destroy comment'
+      argument :id, ID, required: true
+    end
+    def comment_destroy(id:)
+      comment = Comment.find_by_id(id)
+      if comment
+        comment.destroy
+        return 'Success!'
+      else
+        "comment[#{id}] is not found"
+      end
+    end
+
+    field :commentCreate, CommentType, null: false do
+      description 'create a comment'
+      argument :bookId, ID, required: true
+      argument :user, String, required: true
+      argument :content, String, required: true
+    end
+    def comment_create(book_id:, user:, content:)
+      Comment.create!(
+        book_id: book_id,
+        user: user,
+        content: content
+      )
+    end
   end
 end

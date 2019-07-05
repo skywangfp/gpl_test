@@ -7,7 +7,7 @@ ruby '2.6.2'
 gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 # gem 'pg', '>= 0.18', '< 2.0'
-gem 'mysql2'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -49,12 +49,15 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'faker'
 end
 
 gem 'graphql'
 gem 'graphiql-rails'
 
 gem 'react_on_rails'
+gem "webpacker", "~> 3"
+gem 'rack-cors'
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
@@ -64,7 +67,4 @@ group :test do
   gem 'chromedriver-helper'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# gem 'graphiql-rails', group: :development
+gem 'mini_racer', platforms: :ruby

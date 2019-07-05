@@ -1,4 +1,6 @@
 class GraphqlController < ApplicationController
+  after_action :write_out_log
+
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]

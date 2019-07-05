@@ -28,9 +28,10 @@ module Types
       argument :priceEnd, Float, required: false
       argument :pageSize, Integer, required: false
       argument :pageNo, Integer, required: false
+      argument :bookId, ID, required: false
     end
 
-    def books(name: nil, author: nil, price_start: nil, price_end: nil, page_size: 15, page_no: 0)
+    def books(name: nil, author: nil, price_start: nil, price_end: nil, page_size: 15, page_no: 0, book_id: nil)
       Book.filter_name(name)
         .filter_author(author)
         .filter_price_start(price_start)
@@ -45,6 +46,24 @@ module Types
 
     def user(id:)
       User.find(id)
+    end
+
+    field :users, [UserType], null: true do
+      description 'show users'
+      argument :first, Integer, required: false
+    end
+
+    def users(first:)
+      users = User.all
+      users = users.limit(first) if first.present?
+      users
+    end
+
+    field :bookList, BookType, null: true do
+      description 'book list'
+    end
+    def book_list
+      User.all
     end
   end
 end

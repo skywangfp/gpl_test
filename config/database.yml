@@ -14,15 +14,23 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
+
+# pg
 default: &default
-  adapter: mysql2
-  encoding: utf8
-  # For details on connection pooling, see Rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  adapter: postgresql
+  encoding: unicode
   host: localhost
-  # username: root
-  # password: wang
+  username: sky
+  password: wang
+
+# mysql
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   host: localhost
+#   # username: root
+#   # password: wang
 
 development:
   <<: *default
