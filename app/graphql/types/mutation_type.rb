@@ -1,5 +1,8 @@
 module Types
   class MutationType < Types::BaseObject
+    # field :bookDestroy, mutation
+    field :book_destroy, mutation: Mutations::BookDestroy
+
     # TODO: remove me
     field :test_field, String, null: false,
       description: "An example field added by the generator"
@@ -40,21 +43,6 @@ module Types
       book.price = price if price.present?
       book.save!
       book
-    end
-
-    field :bookDestroy, String, null: false do
-      description 'destroy book'
-      argument :id, ID, required: true
-    end
-    def book_destroy(id:)
-      book = Book.find_by_id(id)
-
-      if book
-        book.destroy
-        'Success!'
-      else
-        "book[#{id}] is not found"
-      end
     end
 
     field :commentDestroy, String, null: false do
